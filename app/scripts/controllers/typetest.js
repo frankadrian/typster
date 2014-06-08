@@ -12,7 +12,12 @@ angular.module('typesterApp')
             $scope.$broadcast('timer-start');
             $scope.timerRunning = true;
             $scope.userInput = '';
-            document.getElementById('input-text').focus();
+
+            //for tests to pass
+            var inputElement = document.getElementById('input-text');
+            if (inputElement) {
+                inputElement.focus();
+            }
         };
 
         $scope.stopTimer = function () {
@@ -27,13 +32,15 @@ angular.module('typesterApp')
         };
 
         $scope.userInputChanged = function (event) {
-            $scope.wordCount = $scope.userInput.split(' ').length;
 
-            //update avg wmp
+            if ($scope.timerRunning) {
+                $scope.wordCount = $scope.userInput.split(' ').length;
+                //update avg wmp
 
-            //if ctrl+enter was pressed stop timer.
-            if (event.ctrlKey && event.keyCode === 13) {
-                $scope.stopTimer();
+                //if ctrl+enter was pressed stop timer.
+                if (event.ctrlKey && event.keyCode === 13) {
+                    $scope.stopTimer();
+                }
             }
         };
 

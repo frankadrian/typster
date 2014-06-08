@@ -16,13 +16,17 @@ describe('Controller: TypetestCtrl', function () {
         });
     }));
 
-    it('should have a start timer function', function () {
-        //expect(scope.awesomeThings.length).toBe(3);
-        expect(scope.startTimer).toBeDefined();
+    it('should have a text the user can type', function () {
+        expect(scope.previewText.length).toBeGreaterThan(0);
     });
 
-    it('should have a stop timer function', function () {
-        //expect(scope.awesomeThings.length).toBe(3);
-        expect(scope.stopTimer).toBeDefined();
+    it('should start the timer', function () {
+        scope.startTimer();
+        expect(scope.timerRunning).toBe(true);
+    });
+
+    it('should stop the timer', function () {
+        scope.stopTimer();
+        expect(scope.timerRunning).toBe(false);
     });
 });
