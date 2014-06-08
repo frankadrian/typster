@@ -300,10 +300,10 @@ module.exports = function (grunt) {
 
         // Replace Google CDN references
         /*cdnify: {
-            dist: {
-                html: ['<%= yeoman.dist %>*//*.html']
-            }
-        },*/
+         dist: {
+         html: ['<%= yeoman.dist %>*//*.html']
+         }
+         },*/
 
         // Copies remaining files to places other tasks can use
         copy: {
@@ -385,6 +385,9 @@ module.exports = function (grunt) {
             unit: {
                 configFile: 'karma.conf.js',
                 singleRun: true
+            },
+            e2e: {
+                configFile: 'karma-e2e.conf.js'
             }
         }
     });
@@ -415,7 +418,7 @@ module.exports = function (grunt) {
         'concurrent:test',
         'autoprefixer',
         'connect:test',
-        'karma'
+        'karma:unit'
     ]);
 
     grunt.registerTask('build', [
@@ -427,7 +430,7 @@ module.exports = function (grunt) {
         'concat',
         'ngmin',
         'copy:dist',
-//        'cdnify',
+        //        'cdnify',
         'cssmin',
         'uglify',
         'rev',
