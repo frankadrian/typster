@@ -6,12 +6,10 @@ describe('Typster App: MainController', function () {
         //        browser().navigateTo('/#/');
     });
 
-
     /*    it('should redirect to a new unique hash page', function () {
      browser().navigateTo('/#/');
      expect(browser().window().hash()).toContain('/snippets/');
      });
-
 
      it('should be able to create a new item', function () {
      element('.js-create-modal').click();
