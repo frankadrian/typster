@@ -4,7 +4,7 @@
 ##Development 
 
 ####dependencies:
-- node (preferably: v0.11)
+- node v0.11
 
 ####set up
 - `git clone <git@reponame.lol>`
