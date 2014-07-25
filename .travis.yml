@@ -1,8 +1,11 @@
 language: node_js
 node_js:
   - '0.11'
+rvm:
+  - '1.9.3'
 before_script:
   - 'npm install -g grunt-cli'
+  - 'sh setup.sh'
   - 'sh update.sh'
 script:
-  - 'grunt test'
+  - 'grunt test:dist'

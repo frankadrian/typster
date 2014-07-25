@@ -86,7 +86,18 @@ module.exports = function (grunt) {
                         'test',
                         '<%= yeoman.app %>'
                     ]
+                },
+                dist: {
+                    options: {
+                        port: 9001,
+                        base: [
+                            '.tmp',
+                            'test',
+                            '<%= yeoman.dist %>'
+                        ]
+                    }
                 }
+
             },
             dist: {
                 options: {
@@ -413,13 +424,24 @@ module.exports = function (grunt) {
         grunt.task.run(['serve:' + target]);
     });
 
-    grunt.registerTask('test', [
-        'clean:server',
-        'concurrent:test',
-        'autoprefixer',
-        'connect:test',
-        'karma:unit'
-    ]);
+    grunt.registerTask('test', function (target) {
+        if (target === 'dist') {
+            //run build and test build
+            return grunt.task.run(['build', 'clean:server',
+                'concurrent:test',
+                'autoprefixer',
+                'connect:test:dist',
+                'karma:unit']);
+        }
+
+        grunt.task.run([
+            'clean:server',
+            'concurrent:test',
+            'autoprefixer',
+            'connect:test',
+            'karma:unit'
+        ]);
+    });
 
     grunt.registerTask('build', [
         'clean:dist',
