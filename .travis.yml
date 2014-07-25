@@ -8,4 +8,4 @@ before_script:
   - 'sh setup.sh'
   - 'sh update.sh'
 script:
-  - 'grunt test:dist'
+  - 'grunt test'
