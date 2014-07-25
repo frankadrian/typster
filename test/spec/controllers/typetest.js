@@ -16,13 +16,13 @@ describe('Controller: TypetestCtrl', function () {
         });
     }));
 
-    it('should have a text the user can type', function () {
-        expect(scope.previewText.length).toBeGreaterThan(0);
-    });
-
     it('should start the timer', function () {
         scope.startTimer();
         expect(scope.timerRunning).toBe(true);
+    });
+
+    it('should have a text the user can type', function () {
+        expect(scope.previewText.length).toBeGreaterThan(0);
     });
 
     it('should stop the timer', function () {

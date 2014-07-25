@@ -1,6 +1,7 @@
 <div class="pure-g-r">
     <div class="pure-u-1-5">
         <div class="timer js-timer">
+            Time:
             <timer autostart="false" interval="1000">{{minutes}}:{{seconds}}</timer>
         </div>
     </div>
@@ -17,7 +18,7 @@
         <button class="pure-button" ng-click="stopTimer()" ng-show="timerRunning">Stop</button>
     </div>
     <div class="pure-u-1">
-        <code>
+        <code ng-show="timerRunning">
             {{ previewText }}
         </code>
     </div>
