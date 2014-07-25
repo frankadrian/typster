@@ -8,5 +8,7 @@ echo "--- Let's get to work. Installing compass. ---"
 echo "--- running 'gem install compass' ---"
 gem install compass
 
+echo "--- running 'bower install' ---"
+bower install
 
 echo "--- All done, enjoy! :) ---"

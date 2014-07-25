@@ -6,6 +6,5 @@ rvm:
 before_script:
   - 'npm install -g grunt-cli'
   - 'sh setup.sh'
-  - 'sh update.sh'
 script:
-  - 'grunt test:dist'
+  - 'grunt test'
