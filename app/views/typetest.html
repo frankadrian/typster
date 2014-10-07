@@ -1,41 +1,59 @@
-<div class="pure-g-r">
-    <div class="pure-u-1-5">
-        <div class="timer js-timer">
-            Time:
-            <timer autostart="false" interval="1000">{{minutes}}:{{seconds}}</timer>
-        </div>
+<div class="">
+    <div class="sixteen wide column">
+        <h1 class="ui aligned center header">Typster</h1>
+        <sub class="ui aligned center ">simple WPM test</sub>
     </div>
-    <div class="pure-u-1-5">
-        <div class="wpm-avg">
-            WPM: {{avgWpm}}
-        </div>
-    </div>
-    <div class="pure-u-1-5">
-        word count: {{wordCount}}
-    </div>
-    <div class="pure-u-1-5">
-        <button class="pure-button" ng-click="startTimer()" ng-show="!timerRunning">Start</button>
-        <button class="pure-button" ng-click="stopTimer()" ng-show="timerRunning">Stop</button>
-    </div>
-    <div class="pure-u-1">
-        <code ng-show="timerRunning">
-            {{ previewText }}
-        </code>
-    </div>
-    <div class="pure-u-1">
-        <textarea name="type-input"
-                  id="input-text"
-                  cols="30"
-                  rows="10"
-                  ng-paste="textInputPaste($event)"
-                  ng-keyup="userInputChanged($event)"
-                  ng-model="userInput"
-                  placeholder="Type here"></textarea>
 
-        <div ng-show="timerRunning">Tip: Hit ctrl+enter to stop the timer</div>
-    </div>
-    <div class="pure-u-1">
-        <div>{{ result }}</div>
+    <div class="ui grid">
+        <div class="row">
+            <div class="two wide column">
+                <div class="ui segment timer js-timer">
+                    Time:
+                    <timer autostart="false" interval="1000">{{minutes}}:{{seconds}}</timer>
+                </div>
+            </div>
+
+            <div class="two wide column">
+                <div class="ui segment wpm-avg">
+                    WPM: {{avgWpm}}
+                </div>
+            </div>
+            <div class="three wide column">
+                <div class="ui segment">
+                    word count: {{wordCount}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <code class="" ng-show="timerRunning" fa-fade-in="timerRunning">
+                    {{ previewText }}
+                </code>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="four wide column">
+                <button class="ui green button" ng-click="startTimer()" ng-show="!timerRunning">Start</button>
+                <button class="ui green button" ng-click="stopTimer()" ng-show="timerRunning">Stop</button>
+            </div>
+            <div class="six wide column ui form">
+                <textarea name="type-input"
+                          id="input-text"
+                          cols="30"
+                          rows="10"
+                          ng-paste="textInputPaste($event)"
+                          ng-keyup="userInputChanged($event)"
+                          ng-model="userInput"
+                          placeholder="Type here"></textarea>
+
+                <div ng-show="timerRunning">Tip: Hit ctrl+enter to stop the timer</div>
+            </div>
+        </div>
+
+        <div class="six wide column">
+            <div>{{ result }}</div>
+        </div>
     </div>
 </div>
 
