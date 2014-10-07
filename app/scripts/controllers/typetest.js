@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('typesterApp')
-    .controller('TypetestCtrl', function ($scope) {
-        //$scope.timer;
+    .controller('TypetestCtrl', function ($scope, Text) {
         $scope.avgWpm = 0;
         $scope.wordCount = 0;
         $scope.userInput = '';
-        $scope.previewText = 'One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What\'s happened to me?" he thought. It wasn\'t a dream. His room, a proper human';
+        $scope.previewText = Text.getRandomText();
         $scope.result = {};
+        $scope.timerRunning = false;
 
         function resetScope () {
             $scope.avgWpm = 0;
@@ -18,6 +18,10 @@ angular.module('typesterApp')
 
         $scope.startTimer = function () {
             $scope.$broadcast('timer-start');
+            $scope.$broadcast('timer-started');
+        };
+
+        $scope.$on('timer-started', function (event, data) {
             $scope.timerRunning = true;
             resetScope();
 
@@ -26,12 +30,19 @@ angular.module('typesterApp')
             if (inputElement) {
                 inputElement.focus();
             }
-        };
+
+        });
 
         $scope.stopTimer = function () {
             $scope.$broadcast('timer-stop');
-            $scope.timerRunning = false;
         };
+
+        $scope.$on('timer-stopped', function (event, data) {
+            $scope.timerRunning = false;
+            $scope.calculateWpm(data);
+            $scope.evaluateResult();
+
+        });
 
         $scope.textInputPaste = function (event) {
             event.preventDefault();
@@ -57,16 +68,9 @@ angular.module('typesterApp')
             $scope.avgWpm = $scope.wordCount / minutes;
         };
 
-        $scope.$on('timer-stopped', function (event, data) {
-            /*console.log('minutes = ' + data.minutes);
-             console.log('seconds = ' + data.seconds);*/
-
-            $scope.calculateWpm(data);
-            $scope.evaluateResult();
-
-        });
-
         $scope.evaluateResult = function () {
+            //basically split the text by words and compare
+            //for a match
             var boilerTextArr = $scope.previewText.split(' '),
                 typedTextArr = $scope.userInput.split(' '),
                 errorCount = 0,
@@ -76,16 +80,13 @@ angular.module('typesterApp')
             for (; len > i; i++) {
                 var neededWord = boilerTextArr[i],
                     typedWord = typedTextArr[i];
-
                 if (typedWord) {
-
                     if (typedWord !== neededWord) {
-                        //increment error
                         errorCount++;
                         //add error message
                         errors.push(typedWord + ' did not equal ' + neededWord);
                     }
-                } else {
+                    //} else
                     //user did not type this word
                 }
             }
@@ -95,6 +96,4 @@ angular.module('typesterApp')
                 'errorCount': errorCount
             };
         };
-
-
     });
