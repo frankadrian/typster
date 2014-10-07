@@ -5,6 +5,7 @@ angular.module('typesterApp', [
     'ngResource',
     'ngSanitize',
     'ngRoute',
+    'ngAnimate',
     'timer'
 ])
     .config(function ($routeProvider) {
