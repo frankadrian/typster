@@ -16,26 +16,16 @@ angular.module('typesterApp')
             $scope.result = {};
         }
 
-        $scope.startTimer = function () {
-            $scope.$broadcast('timer-start');
-            $scope.$broadcast('timer-started');
-        };
-
-        $scope.$on('timer-started', function (event, data) {
-            $scope.timerRunning = true;
+        $scope.$on('timer-started', function () {
             resetScope();
+            $scope.timerRunning = true;
 
             //for tests to pass
             var inputElement = document.getElementById('input-text');
             if (inputElement) {
                 inputElement.focus();
             }
-
         });
-
-        $scope.stopTimer = function () {
-            $scope.$broadcast('timer-stop');
-        };
 
         $scope.$on('timer-stopped', function (event, data) {
             $scope.timerRunning = false;
@@ -43,6 +33,16 @@ angular.module('typesterApp')
             $scope.evaluateResult();
 
         });
+
+        $scope.startTimer = function () {
+            //broadcast for angular-timer
+            $scope.$broadcast('timer-start');
+            $scope.$broadcast('timer-started');
+        };
+
+        $scope.stopTimer = function () {
+            $scope.$broadcast('timer-stop');
+        };
 
         $scope.textInputPaste = function (event) {
             event.preventDefault();
@@ -58,7 +58,7 @@ angular.module('typesterApp')
                     $scope.stopTimer();
                 }
                 //update wordcount
-                //maybe consider using 5 char = 1 word
+                //using 5 char = 1 word
                 $scope.wordCount = $scope.userInput.length / 5;
             }
         };

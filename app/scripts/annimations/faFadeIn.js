@@ -3,10 +3,10 @@
     angular.module('typesterApp')
         .animation('.fadeIn', function () {
             return {
-                addClass: function (element, className) {
+                addClass: function (element) {
                     TweenLite.to(element, 1.5, {css: {alpha: 1, height: '100%'}});
                 },
-                removeClass: function (element, className) {
+                removeClass: function (element) {
                     TweenLite.to(element, 1.5, {css: {alpha: 0, height: '0%'}});
                 }
             };
